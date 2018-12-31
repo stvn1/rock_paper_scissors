@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+    <script>
+        //The Math.floor() function returns the largest integer
+        // less than or equal to a given number.
+        function computerPlay(){
+            var ranNum = Math.floor(Math.random() * 3) + 1;
+            var computerSelection;
+            switch (ranNum) {
+                case 1:
+                    computerSelection="Rock";
+                    break;
+                case 2:
+                    computerSelection= "Paper";
+                    break;
+
+                default:
+                    computerSelection="Scissors";
+                    break;
+            }
+            return computerSelection;
+        }
+        computerSelection= computerPlay();
+
+        function playRound(playerSelection , computerSelection){
+            playerSelection=playerSelection.toLowerCase();
+            var ans;
+            var score=0;
+            
+            if(playerSelection == "rock" && computerSelection == "Rock")
+            {
+                ans ="Tie!!";
+            }
+                        
+            if(playerSelection == "rock" && computerSelection == "Paper")
+            {
+                ans ="You Lose! Paper beats Rock";
+                score =-1;
+            }
+            if(playerSelection == "rock" && computerSelection == "Scissors")
+            {
+                ans ="You win! Rock beats scissors";
+                score=+1;
+            }
+            if(playerSelection == "paper" && computerSelection == "Paper")
+            {
+                ans ="Tie!!";
+            }
+            if(playerSelection == "paper" && computerSelection == "Scissors")
+            {
+                ans ="You Lose! scissors beats paper";
+                score=-1;
+            }
+            if(playerSelection == "paper" && computerSelection == "Rock")
+            {
+                ans ="You win! Paper beats Rock";
+                score=+1;
+            }
+            if(playerSelection == "scissors" && computerSelection == "Paper")
+            {
+                ans ="You win! scissors beats paper";
+                score=+1;
+            }
+            if(playerSelection == "scissors" && computerSelection == "Scissors")
+            {
+                ans ="Tie";
+            }
+            if(playerSelection == "scissors" && computerSelection == "Rock")
+            {
+                ans ="You Lose! Rock beats Scissors";
+                score=-1;
+            }
+            return [ans,score];
+            
+
+        }
+
+        function game(){
+            score =0;
+            scoreComputer=0;
+            for(var i=0; i<5; i++){
+                var choice= prompt("Select paper, scissors or rock");
+                var ans;
+                var action;
+                playing =playRound(choice,computerPlay());
+                ans =alert(playing[0]);
+                
+                if (playing[1]==1){
+                    score=+1;
+                }
+                if(playing[1]==-1){
+                    scoreComputer=+1;
+                }
+            }
+            if(score>scoreComputer){
+                alert("You Win!!!!");
+            }
+
+            if(score<scoreComputer){
+                alert("You Lose!!!!");
+            }
+            if(score==scoreComputer){
+                alert("Its a tie!!!!");
+            }
+            
+            console.log(score,scoreComputer)
+
+        }
+
+    
+    
+    </script>
+    
+</body>
+</html>
