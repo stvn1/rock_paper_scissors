@@ -6,12 +6,56 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <style>
+        .buttons {
+            padding-left: 40%;
+            padding-top: 40px;
+        }
+        #rock{
+            padding: 30px;
+            background-color: gray;
+        }
+        #paper{
+            padding: 30px;
+            background-color: white;
+        }
+        #scissors{
+            padding: 30px;
+            background-color: rgb(118, 118, 226);
+        }
+        h1{
+            padding-left: 35%;
+            color: rgb(156, 45, 45);
+            
+        }
+        body{
+            background-color: beige;
+        }
+        #result{
+            padding-left: 20px;
+            font-size: 15px;
+        }
+
+    
+    </style>
+
 </head>
 <body>
+    <h1>Rock Paper Scissors Game</h1>
 
 
-    <div>
-        <Button onclick="game()">Start</Button>
+    <div class="buttons">
+
+        <Button id="rock">Rock</Button>
+        <Button id="paper">Paper</Button>
+        <Button id="scissors">Scissors</Button>
+
+
+    </div>
+
+    <div id="result">
+        <h1 id="display"></h1>
+
     </div>
 
     <script>
@@ -54,7 +98,7 @@
             if(playerSelection == "rock" && computerSelection == "Scissors")
             {
                 ans ="You win! Rock beats scissors";
-                score=+1;
+                score=1;
             }
             if(playerSelection == "paper" && computerSelection == "Paper")
             {
@@ -68,12 +112,12 @@
             if(playerSelection == "paper" && computerSelection == "Rock")
             {
                 ans ="You win! Paper beats Rock";
-                score=+1;
+                score=1;
             }
             if(playerSelection == "scissors" && computerSelection == "Paper")
             {
                 ans ="You win! scissors beats paper";
-                score=+1;
+                score=1;
             }
             if(playerSelection == "scissors" && computerSelection == "Scissors")
             {
@@ -88,10 +132,98 @@
             
 
         }
+        const buttons = document.querySelectorAll('button');
+
+        const displayResult= document.querySelector('#result');
+
+        buttons.forEach((button) => {
+
+        // and for each one we add a 'click' listener
+        button.addEventListener('click', (e) => {
+
+                
+
+            if (button.id ==  "rock"){
+                play("rock");
+            }
+            if (button.id ==  "paper"){
+                play("paper");
+            }
+            if (button.id ==  "scissors"){
+                play("scissors");
+            }
+
+            });
+        });
+        const container = document.querySelector('#result');
+        let createH1 = document.createElement('h1');
+        
+        var score =0;
+        var scoreComputer=0;
+
+
+        function play(selection){
+/*
+            if(score==5 || scoreComputer ==5){
+                if(score>scoreComputer){
+                    
+                    score=0;
+                    scoreComputer=0;
+                    return alert("You Win!!!!");
+                    
+                 }
+
+                if(score<scoreComputer){
+                    
+                    score=0;
+                    scoreComputer=0;
+                    return alert("You Lose!!!!");;
+                }
+            }
+         */   
+            var playing;
+            var ans;
+            
+
+            playing = playRound(selection,computerPlay());
+
+            if (playing[1]==1){
+                score+=1;
+            }
+            if(playing[1]==-1){
+                scoreComputer+=1;
+            }
+            ans = playing[0];
+
+            createH1.textContent= ans;
+            container.appendChild(createH1);
+
+
+            console.log(score,scoreComputer)
+            if(score==5 || scoreComputer ==5){
+                if(score>scoreComputer){
+                    
+                    score=0;
+                    scoreComputer=0;
+                    return alert("You Win!!!!");
+                    
+                 }
+
+                if(score<scoreComputer){
+                    
+                    score=0;
+                    scoreComputer=0;
+                    return alert("You Lose, the computer won!!");;
+                }
+            }
+
+
+        }
+
+            
+
 
         function game(){
-            score =0;
-            scoreComputer=0;
             for(var i=0; i<5; i++){
                 var choice= prompt("Select paper, scissors or rock");
                 var ans;
